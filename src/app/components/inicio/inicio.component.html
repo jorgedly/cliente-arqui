@@ -1,0 +1,88 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Datos de los sensores</mat-card-title>
+        <mat-card-subtitle>Elegir un sensor</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Sensor</mat-label>
+            <mat-select (selectionChange)="cambio($event)" [(value)]="sensor">
+                <mat-option *ngFor="let sensor of sensores" [value]="sensor">
+                    {{sensor}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle (change)="svss=!svss" [checked]="svss">
+            Sensor vs Sensor
+        </mat-slide-toggle>
+        <mat-slide-toggle (change)="filtra=!filtra" [checked]="filtra">
+            Filtrar
+        </mat-slide-toggle>
+        <mat-card *ngIf="svss">
+            <mat-card-header>
+                <mat-card-subtitle>Elegir un segundo sensor</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Sensor</mat-label>
+                    <mat-select (selectionChange)="cambio($event)" [(value)]="sensor2">
+                        <mat-option *ngFor="let sensor of sensores" [value]="sensor">
+                            {{sensor}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="filtra">
+            <mat-card-header>
+                <mat-card-subtitle>Elegir una fecha de inicio y de fin</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>Fecha de inicio</mat-label>
+                            <mat-select (selectionChange)="cambio($event)" [(value)]="fechaInicio">
+                                <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+                                    {{fecha}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Hora de inicio</mat-label>
+                            <mat-select (selectionChange)="cambio($event)" [(value)]="horaInicio">
+                                <mat-option *ngFor="let hora of horas" [value]="hora">
+                                    {{hora}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>Fecha de fin</mat-label>
+                            <mat-select (selectionChange)="cambio($event)" [(value)]="fechaFin">
+                                <mat-option *ngFor="let fecha of fechas" [value]="fecha">
+                                    {{fecha}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Hora de fin</mat-label>
+                            <mat-select (selectionChange)="cambio($event)" [(value)]="horaFin">
+                                <mat-option *ngFor="let hora of horas" [value]="hora">
+                                    {{hora}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+</mat-card>
+
+<ngx-charts-line-chart [view]="view" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis"
+    [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="multi">
+</ngx-charts-line-chart>
